@@ -62,10 +62,10 @@ public class RWFiles {
                     arr[i]=line.charAt(i);
                 }
                 //method  shifting characters by int shift
-                arr= shiftingArray(arr,3);
+                char[] shifted=shiftingArray(arr,3);
                 //array to string
-                StringBuilder sb=new StringBuilder(arr.length);
-                sb.append(arr);
+                StringBuilder sb=new StringBuilder(shifted.length);
+                sb.append(shifted);
                 line=sb.toString();
 
                 fw.write(line+'\n');
@@ -87,18 +87,52 @@ public class RWFiles {
             if (help>47 && help<58){
                 help=(char)(help+shift);
                 help=help>57?(char)(help-10):help;//ternarny operator
+                arr[i]=help;
             }
             //cycling for upper case characters Dec65-90
             else if (help>64 && help<91){
                 help=(char)(help+shift);
                 help=help>90?(char)(help-26):help;//ternarny operator
+                arr[i]=help;
             }
             //cycling for lower case characters Dec97-122
             else if (help>96 && help<123){
                 help=(char)(help+shift);
                 help=help>122?(char)(help-26):help;//ternarny operator
+                arr[i]=help;
             }
         }
         return arr;
+    }
+
+    public void copyFileTurnXY(String fileName){
+        try {
+            FileReader fr=new FileReader(fileName);
+
+            File file=new File("output/"+genName('D'));
+            if (!file.createNewFile()) {
+                System.out.println("Name of the file you want create already exists in this directory. " +
+                        "Application will now stop");
+                return;
+            }
+
+            FileWriter fw=new FileWriter(file);
+            BufferedReader br=new BufferedReader(fr);
+            String line;
+
+            while((line=br.readLine())!=null){
+                line=line.replace('I','_');
+                line=line.replace('Y','_');
+                line=line.replace('i','_');
+                line=line.replace('y','_');
+                fw.write(line+'\n');
+            }
+
+            br.close();
+            fw.close();
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
