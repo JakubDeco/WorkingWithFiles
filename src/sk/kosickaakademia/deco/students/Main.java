@@ -13,6 +13,7 @@ public class Main {
         printFemales(students);
 
         readContactsFromFile(students);
+        System.out.println(students[1].getContact().getEmail()+" "+students[1].getContact().getSkype());
     }
 
     private static void readContactsFromFile(Student[] students) {

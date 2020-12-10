@@ -30,4 +30,6 @@ public class Contact {
     public void setSkype(String skype) {
         this.skype = skype;
     }
+
+    //todo public void printContacts
 }
